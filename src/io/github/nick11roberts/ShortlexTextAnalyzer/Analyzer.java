@@ -49,7 +49,7 @@ public class Analyzer {
 		for(int i = 1; i < sortedWordsLength; i++) {
 			
 			// Equality comparison with the last word
-			if(sortedWords[i-1].equals(sortedWords[i])) {
+			if(sortedWords[i - 1].equals(sortedWords[i])) {
 				
 				++wordCount[numberOfUniqueWords];
 				
@@ -61,7 +61,7 @@ public class Analyzer {
 			
 		}
 		
-		// Correct for off-by-one error for each element up to 
+		// Correct for off-by-one for each element up to 
 		// numberOfUniqueWords inclusively
 		for(int i = 0; i <= numberOfUniqueWords; i++) {
 			
@@ -71,6 +71,19 @@ public class Analyzer {
 		
 		// TODO remove this
 		System.out.println(Arrays.toString(wordCount));
+		
+		int j = 0;
+		for(int i = 1; i < sortedWordsLength; i++) {
+			
+			// Check if the two are different
+			if(!sortedWords[i - 1].equals(sortedWords[i])) {
+				
+				report += "\n" + wordCount[j++] + " " 
+						+ sortedWords[i - 1] + "\n";
+				
+			}
+			
+		}
 		
 		return report;
 		
@@ -118,16 +131,28 @@ public class Analyzer {
 		int leftSize = leftSide.length;
 		int rightSize = rightSide.length;
 		
-		int i = 0, j = 0, k = 0;
+		// Counters for left, right, and merged respectively
+		int i = 0;
+		int j = 0;
+		int k = 0;
 		
-		// Weave the elements in a sorted manner while there are still elements in
-		// both lists
+		// Weave the elements in a sorted manner while there are still 
+		// elements in both lists
 		while (i < leftSize && j < rightSize) {
+			
+			// Comparison to determine which one should be added to merged
             if (this.greaterThan(leftSide[i], rightSide[j])) {	
+            	
+            	// Take the smaller one
             	mergedArray[k++] = rightSide[j++];
+            	
             } else {
+            	
+            	// Take the smaller or equal one
             	mergedArray[k++] = leftSide[i++];
+            	
             }
+            
         }
 		
 		// Complete the rest of both leftSide and rightSide
