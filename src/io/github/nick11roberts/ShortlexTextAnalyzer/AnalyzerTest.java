@@ -7,8 +7,6 @@ package io.github.nick11roberts.ShortlexTextAnalyzer;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 
 /**
