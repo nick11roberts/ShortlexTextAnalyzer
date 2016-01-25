@@ -6,7 +6,7 @@ public class Driver {
 		
 		Analyzer analyzer = new Analyzer();
 		
-		analyzer.analyze("The quick brown fox jumped over the lazy brown dog’s back");
+		analyzer.analyze("a a a The fox the back lazy over brown brown dog’s quick jumped ");
 		
 	}
 

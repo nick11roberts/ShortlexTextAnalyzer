@@ -37,25 +37,40 @@ public class Analyzer {
 		// lessThan() comparison
 		sortedWords = this.mergeSort(inputData.split(" "));
 		
+		// TODO remove this
 		System.out.println(Arrays.toString(sortedWords));
 		
 		// Assume sorted, compare each element to neighbor, beginning 
 		// with index 1, to ascertain equality and thus contribute to 
 		// a word count
-		/*
 		int sortedWordsLength = sortedWords.length;
+		int numberOfUniqueWords = 0;
 		wordCount = new int[sortedWordsLength];
 		for(int i = 1; i < sortedWordsLength; i++) {
 			
 			// Equality comparison with the last word
 			if(sortedWords[i-1].equals(sortedWords[i])) {
 				
-				++wordCount[i-1];
+				++wordCount[numberOfUniqueWords];
+				
+			} else {
+				
+				++numberOfUniqueWords;
 				
 			}
 			
 		}
-		*/
+		
+		// Correct for off-by-one error for each element up to 
+		// numberOfUniqueWords inclusively
+		for(int i = 0; i <= numberOfUniqueWords; i++) {
+			
+			++wordCount[i];
+			
+		}
+		
+		// TODO remove this
+		System.out.println(Arrays.toString(wordCount));
 		
 		return report;
 		
