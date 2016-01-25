@@ -37,9 +37,6 @@ public class Analyzer {
 		// lessThan() comparison
 		sortedWords = this.mergeSort(inputData.split(" "));
 		
-		// TODO remove this
-		System.out.println(Arrays.toString(sortedWords));
-		
 		// Assume sorted, compare each element to neighbor, beginning 
 		// with index 1, to ascertain equality and thus contribute to 
 		// a word count
@@ -51,10 +48,12 @@ public class Analyzer {
 			// Equality comparison with the last word
 			if(sortedWords[i - 1].equals(sortedWords[i])) {
 				
+				// Increment the wordcount for that particular entry
 				++wordCount[numberOfUniqueWords];
 				
 			} else {
 				
+				// Increment the number of unique words
 				++numberOfUniqueWords;
 				
 			}
@@ -69,15 +68,15 @@ public class Analyzer {
 			
 		}
 		
-		// TODO remove this
-		System.out.println(Arrays.toString(wordCount));
-		
+		// Generate a report string by combining the two arrays and 
+		// removing duplicates
 		int j = 0;
 		for(int i = 1; i < sortedWordsLength; i++) {
 			
 			// Check if the two are different
 			if(!sortedWords[i - 1].equals(sortedWords[i])) {
 				
+				// Construct a formatted report
 				report += "\n" + wordCount[j++] + " " 
 						+ sortedWords[i - 1] + "\n";
 				
@@ -90,39 +89,39 @@ public class Analyzer {
 	}
 	
 	/**
+	 * Efficiently sorts a String[] in shortlex order
 	 * 
-	 * 
-	 * @param inputArray
-	 * @return
+	 * @param toBeSorted the String[] that is to be sorted
+	 * @return the sorted array
 	 */
-	public String[] mergeSort(String[] inputArray) {
+	public String[] mergeSort(String[] toBeSorted) {
 		
 		// Get the size of the array
-		int arrayLength = inputArray.length;
+		int arrayLength = toBeSorted.length;
 		if(arrayLength < 2) {
-			return inputArray;
+			return toBeSorted;
 		}
 		
 		// Find the 'middle' index and split the array
 		int midIndex = arrayLength / 2; 
-		String[] leftSide = Arrays.copyOfRange(inputArray, 0, midIndex);
-		String[] rightSide = Arrays.copyOfRange(inputArray, midIndex, arrayLength);
+		String[] leftSide = Arrays.copyOfRange(toBeSorted, 0, midIndex);
+		String[] rightSide = Arrays.copyOfRange(toBeSorted, midIndex, arrayLength);
 		
 		this.mergeSort(leftSide);
 		this.mergeSort(rightSide);
-		this.merge(leftSide, rightSide, inputArray);
+		this.merge(leftSide, rightSide, toBeSorted);
 		
-		return inputArray;
+		return toBeSorted;
 		
 	}
 	
 	/**
+	 * Merges two sorted arrays into a larger sorted array
 	 * 
-	 * 
-	 * @param leftSide
-	 * @param rightSide
-	 * @param input
-	 * @return
+	 * @param leftSide the first smaller sorted array
+	 * @param rightSide the second smaller sorted array
+	 * @param mergedArray the final sorted array to be constructed
+	 * @return the final sorted array
 	 */
 	private String[] merge(String[] leftSide, 
 			String[] rightSide, String[] mergedArray) {
@@ -169,11 +168,12 @@ public class Analyzer {
 	}
 
 	/**
+	 * ASCII shortlex comparison for two String objects 
 	 * 
-	 * 
-	 * @param firstString
-	 * @param secondString
-	 * @return
+	 * @param firstString the first operand to be compared
+	 * @param secondString the second operand to be compared
+	 * @return true iff firstString is greater than secondString 
+	 * in ASCII shortlex order
 	 */
 	public boolean greaterThan(String firstString, String secondString){
 		
