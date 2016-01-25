@@ -35,7 +35,7 @@ public class Analyzer {
 		// Split inputData into an array of words, meaning everything that is
 		// separated by " ", and perform mergesort on sortedWords using 
 		// lessThan() comparison
-		sortedWords = inputData.split(" ");
+		sortedWords = this.mergeSort(inputData.split(" "));
 		
 		// TODO remove this
 		System.out.println(Arrays.toString(sortedWords));
@@ -82,7 +82,7 @@ public class Analyzer {
 	 * @param inputArray
 	 * @return
 	 */
-	public int[] mergeSort(int[] inputArray) {
+	public String[] mergeSort(String[] inputArray) {
 		
 		// Get the size of the array
 		int arrayLength = inputArray.length;
@@ -92,8 +92,8 @@ public class Analyzer {
 		
 		// Find the 'middle' index and split the array
 		int midIndex = arrayLength / 2; 
-		int[] leftSide = Arrays.copyOfRange(inputArray, 0, midIndex);
-		int[] rightSide = Arrays.copyOfRange(inputArray, midIndex, arrayLength);
+		String[] leftSide = Arrays.copyOfRange(inputArray, 0, midIndex);
+		String[] rightSide = Arrays.copyOfRange(inputArray, midIndex, arrayLength);
 		
 		this.mergeSort(leftSide);
 		this.mergeSort(rightSide);
@@ -103,8 +103,16 @@ public class Analyzer {
 		
 	}
 	
-	private int[] merge(int[] leftSide, 
-			int[] rightSide, int[] input) {
+	/**
+	 * 
+	 * 
+	 * @param leftSide
+	 * @param rightSide
+	 * @param input
+	 * @return
+	 */
+	private String[] merge(String[] leftSide, 
+			String[] rightSide, String[] mergedArray) {
 		
 		// Calculate the sizes of each side 
 		int leftSize = leftSide.length;
@@ -112,21 +120,26 @@ public class Analyzer {
 		
 		int i = 0, j = 0, k = 0;
 		
+		// Weave the elements in a sorted manner while there are still elements in
+		// both lists
 		while (i < leftSize && j < rightSize) {
-            if (leftSide[i] > rightSide[j]) {	
-            	input[k++] = rightSide[j++];
+            if (this.greaterThan(leftSide[i], rightSide[j])) {	
+            	mergedArray[k++] = rightSide[j++];
             } else {
-            	input[k++] = leftSide[i++];
+            	mergedArray[k++] = leftSide[i++];
             }
         }
+		
+		// Complete the rest of both leftSide and rightSide
         while (i < leftSize) {
-        	input[k++] = leftSide[i++];
-        }
-        while (j < leftSize) {
-        	input[k++] = rightSide[j++];
+        	mergedArray[k++] = leftSide[i++];
+        } 
+        
+        while (j < rightSize) {
+        	mergedArray[k++] = rightSide[j++];
         }
 		
-		return input;
+		return mergedArray;
 		
 	}
 
