@@ -190,16 +190,16 @@ public class Analyzer {
 	private boolean greaterThan(String firstString, String secondString){
 		
 		// boolean to eventually be returned, assume false
-		boolean iGreaterThan = false;
+		boolean isGreaterThan = false;
 		
 		// First compare String length, hence SHORTlex order
 		if(firstString.length() > secondString.length()) {
 			
-			iGreaterThan = true;
+			isGreaterThan = true;
 			
 		} else if(firstString.length() < secondString.length()) {
 			
-			iGreaterThan = false; 
+			isGreaterThan = false; 
 			
 		} else {
 			
@@ -214,13 +214,13 @@ public class Analyzer {
 				if((int)firstString.charAt(i) 
 						> (int)secondString.charAt(i)){
 					
-					iGreaterThan = true;
+					isGreaterThan = true;
 					break;
 					
 				} else if((int)firstString.charAt(i) 
 						< (int)secondString.charAt(i)) {
 					
-					iGreaterThan = false;
+					isGreaterThan = false;
 					break;
 					
 				}
@@ -229,7 +229,7 @@ public class Analyzer {
 			
 		}
 		
-		return iGreaterThan;
+		return isGreaterThan;
 		
 	}
 
