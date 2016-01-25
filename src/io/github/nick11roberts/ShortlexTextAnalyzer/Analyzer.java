@@ -62,10 +62,14 @@ public class Analyzer {
 		
 		// Correct for off-by-one for each element up to 
 		// numberOfUniqueWords inclusively
-		for(int i = 0; i <= numberOfUniqueWords; i++) {
+		if(numberOfUniqueWords != 0){
 			
-			++wordCount[i];
-			
+			for(int i = 0; i <= numberOfUniqueWords; i++) {
+				
+				++wordCount[i];
+				
+			}
+		
 		}
 		
 		// Generate a report string by combining the two arrays and 
@@ -84,8 +88,13 @@ public class Analyzer {
 			
 		}
 		
-		report += "\n   " + wordCount[numberOfUniqueWords - 1] + " " 
-				+ sortedWords[sortedWordsLength - 1] + "\n";
+		// Add the last element if the list isn't empty
+		if(numberOfUniqueWords != 0) {
+
+			report += "\n   " + wordCount[numberOfUniqueWords - 1] + " " 
+					+ sortedWords[sortedWordsLength - 1] + "\n";
+			
+		}
 		
 		return report;
 		
