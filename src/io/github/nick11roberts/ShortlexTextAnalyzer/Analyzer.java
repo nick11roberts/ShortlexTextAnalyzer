@@ -46,31 +46,25 @@ public class Analyzer {
 		for(int i = 1; i < sortedWordsLength; i++) {
 			
 			// Equality comparison with the last word
-			if(sortedWords[i - 1].equals(sortedWords[i])) {
+			if(!sortedWords[i - 1].equals(sortedWords[i])) {
 				
 				// Increment the wordcount for that particular entry
+				++wordCount[numberOfUniqueWords++];
 				++wordCount[numberOfUniqueWords];
 				
 			} else {
-				
-				// Increment the number of unique words
-				++numberOfUniqueWords;
-				
+
+				// Increment the wordcount for that particular entry
+				++wordCount[numberOfUniqueWords];
+			
 			}
 			
 		}
 		
-		// Correct for off-by-one for each element up to 
-		// numberOfUniqueWords inclusively
-		if(numberOfUniqueWords != 0){
-			
-			for(int i = 0; i <= numberOfUniqueWords; i++) {
-				
-				++wordCount[i];
-				
-			}
-		
-		}
+		//TODO remove
+		System.out.println(numberOfUniqueWords);
+		System.out.println(Arrays.toString(sortedWords));
+		System.out.println(Arrays.toString(wordCount));
 		
 		// Generate a report string by combining the two arrays and 
 		// removing duplicates
