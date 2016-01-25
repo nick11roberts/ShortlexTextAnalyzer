@@ -35,7 +35,7 @@ public class Analyzer {
 		// Split inputData into an array of words, meaning everything that is
 		// separated by " ", and perform mergesort on sortedWords using 
 		// lessThan() comparison
-		sortedWords = this.mergeSort(inputData.split(" "));
+		sortedWords = inputData.split(" ");
 		
 		// TODO remove this
 		System.out.println(Arrays.toString(sortedWords));
@@ -79,14 +79,54 @@ public class Analyzer {
 	/**
 	 * 
 	 * 
-	 * @param unsortedList
+	 * @param inputArray
 	 * @return
 	 */
-	private String[] mergeSort(String[] unsortedList) {
+	public int[] mergeSort(int[] inputArray) {
 		
-		// TODO implement mergeSort
+		// Get the size of the array
+		int arrayLength = inputArray.length;
+		if(arrayLength < 2) {
+			return inputArray;
+		}
 		
-		return unsortedList;
+		// Find the 'middle' index and split the array
+		int midIndex = arrayLength / 2; 
+		int[] leftSide = Arrays.copyOfRange(inputArray, 0, midIndex);
+		int[] rightSide = Arrays.copyOfRange(inputArray, midIndex, arrayLength);
+		
+		this.mergeSort(leftSide);
+		this.mergeSort(rightSide);
+		this.merge(leftSide, rightSide, inputArray);
+		
+		return inputArray;
+		
+	}
+	
+	private int[] merge(int[] leftSide, 
+			int[] rightSide, int[] input) {
+		
+		// Calculate the sizes of each side 
+		int leftSize = leftSide.length;
+		int rightSize = rightSide.length;
+		
+		int i = 0, j = 0, k = 0;
+		
+		while (i < leftSize && j < rightSize) {
+            if (leftSide[i] > rightSide[j]) {	
+            	input[k++] = rightSide[j++];
+            } else {
+            	input[k++] = leftSide[i++];
+            }
+        }
+        while (i < leftSize) {
+        	input[k++] = leftSide[i++];
+        }
+        while (j < leftSize) {
+        	input[k++] = rightSide[j++];
+        }
+		
+		return input;
 		
 	}
 
@@ -97,19 +137,19 @@ public class Analyzer {
 	 * @param secondString
 	 * @return
 	 */
-	private boolean lessThan(String firstString, String secondString){
+	public boolean greaterThan(String firstString, String secondString){
 		
 		// boolean to eventually be returned, assume false
-		boolean isLessThan = false;
+		boolean iGreaterThan = false;
 		
 		// First compare String length, hence SHORTlex order
-		if(firstString.length() < secondString.length()) {
+		if(firstString.length() > secondString.length()) {
 			
-			isLessThan = true;
+			iGreaterThan = true;
 			
-		} else if(firstString.length() > secondString.length()) {
+		} else if(firstString.length() < secondString.length()) {
 			
-			isLessThan = false; 
+			iGreaterThan = false; 
 			
 		} else {
 			
@@ -122,14 +162,16 @@ public class Analyzer {
 				
 				// If the two differ, then set isLessThan to either true or false
 				if((int)firstString.charAt(i) 
-						< (int)secondString.charAt(i)){
+						> (int)secondString.charAt(i)){
 					
-					isLessThan = true;
+					iGreaterThan = true;
+					break;
 					
 				} else if((int)firstString.charAt(i) 
-						> (int)secondString.charAt(i)) {
+						< (int)secondString.charAt(i)) {
 					
-					isLessThan = false;
+					iGreaterThan = false;
+					break;
 					
 				}
 				
@@ -137,7 +179,7 @@ public class Analyzer {
 			
 		}
 		
-		return isLessThan;
+		return iGreaterThan;
 		
 	}
 
