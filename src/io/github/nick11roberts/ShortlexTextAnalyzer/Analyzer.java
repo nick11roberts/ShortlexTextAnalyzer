@@ -77,12 +77,15 @@ public class Analyzer {
 			if(!sortedWords[i - 1].equals(sortedWords[i])) {
 				
 				// Construct a formatted report
-				report += "\n" + wordCount[j++] + " " 
+				report += "\n   " + wordCount[j++] + " " 
 						+ sortedWords[i - 1] + "\n";
 				
 			}
 			
 		}
+		
+		report += "\n   " + wordCount[numberOfUniqueWords - 1] + " " 
+				+ sortedWords[sortedWordsLength - 1] + "\n";
 		
 		return report;
 		
