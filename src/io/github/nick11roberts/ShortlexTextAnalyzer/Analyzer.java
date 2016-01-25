@@ -20,7 +20,7 @@ public class Analyzer {
 	 * @param inputData the data to be analyzed
 	 * @return the formatted analytics String
 	 */
-	public String analyze(String inputData) {
+	public String generateReport(String inputData) {
 		
 		// String to eventually be returned
 		String report = "";
