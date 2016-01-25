@@ -94,7 +94,7 @@ public class Analyzer {
 	 * @param toBeSorted the String[] that is to be sorted
 	 * @return the sorted array
 	 */
-	public String[] mergeSort(String[] toBeSorted) {
+	private String[] mergeSort(String[] toBeSorted) {
 		
 		// Get the size of the array
 		int arrayLength = toBeSorted.length;
@@ -175,7 +175,7 @@ public class Analyzer {
 	 * @return true iff firstString is greater than secondString 
 	 * in ASCII shortlex order
 	 */
-	public boolean greaterThan(String firstString, String secondString){
+	private boolean greaterThan(String firstString, String secondString){
 		
 		// boolean to eventually be returned, assume false
 		boolean iGreaterThan = false;
