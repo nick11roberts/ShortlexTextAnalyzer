@@ -49,54 +49,50 @@ public class Analyzer {
 		// lessThan() comparison
 		sortedWords = this.mergeSort(inputData.split(" "));
 		
-		// Assume sorted, compare each element to neighbor, beginning 
-		// with index 1, to ascertain equality and thus contribute to 
-		// a word count
+		// Keep track of how many unique words there are
+		int numberOfUniqueWords = 0;
+		
+		// Access this once for efficiency
 		int sortedWordsLength = sortedWords.length;
-		int k = sortedWordsLength - 1;
-		int numberOfUniqueWords = sortedWordsLength;
-		int runWordIndex = 0;
-		boolean startRun = false;
+		
+		// To be used for storing word stats
 		wordCount = new int[sortedWordsLength];
+
+		// Represents the summation of every run length
+		// and used as the index of sortedWords[]
+		int sum = 0;
 		
-		// Initially assume every word is unique, thus setting every index to 1
-		for(int i = 0; i < sortedWordsLength; i++) {
+		// Runs through sortedWords once, O(n)
+		for(int i = 0; sum < sortedWordsLength; i++) {
 			
-			wordCount[i] = 1;
-			
-		}
-		
-		// Beginning with index 1, iterate through the sorted list
-		// keeping in mind that if there are duplicates, then they are 
-		// neighbors because the list is shortlex sorted
-		for(int i = 1; i < sortedWordsLength; i++) {
-			
-			if(sortedWords[i - 1].equals(sortedWords[i])){
+			// Find run length, only runs through part of sortedWords, so 
+			// << O(n)
+			for(int j = sum; j < sortedWordsLength; j++) {
 				
-				// Check if we have begun a run of equal Strings
-				if(!startRun) {
+				// Part of a run... 
+				if(sortedWords[sum].equals(sortedWords[j])) {
 					
-					// Save the index, but only this time
-					startRun = true;
-					runWordIndex = i - 1;
+					// Increment word count at that wordCount index
+					wordCount[i]++;
+					
+				} else {
+					
+					// Leave the loop to maximize efficiency, there
+					// is nothing left to be done if it is not
+					// part of a run (that rhymes!)
+					break;
 					
 				}
 				
-				// Update the appropriate index
-				wordCount[runWordIndex]++;
-				
-				// We no longer have this many unique elements, 
-				// update accordingly
-				wordCount[k] = 0;
-				k--;
-				numberOfUniqueWords--;
-				
-			} else {
-				
-				// We have not started a run
-				startRun = false;
-				
 			}
+			
+			// Update sum so as to more efficiently jump through the loop,
+			// we're on a schedule here... 
+			sum += wordCount[i];
+			
+			// Update the number of unique words, it is necessary for
+			// generating the correct report
+			numberOfUniqueWords = i + 1;
 			
 		}
 		

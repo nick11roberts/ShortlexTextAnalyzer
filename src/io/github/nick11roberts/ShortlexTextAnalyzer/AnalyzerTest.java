@@ -27,6 +27,7 @@ public class AnalyzerTest {
 			"the the", 
 			"and and and and and and",
 			"Sick sick and more sick Bleh.",
+			"the the the and and what what what what what what the and huh?",
 	};
 	private String[] testCasesOut = {
 			"",
@@ -39,6 +40,7 @@ public class AnalyzerTest {
 			"\n   6 and\n",
 			"\n   1 and\n\n   1 Sick\n\n   1 more\n\n   2 sick\n\n   " +
 					"1 Bleh.\n",
+			"\n   3 and\n\n   4 the\n\n   1 huh?\n\n   6 what\n",
 			
 	};
 
