@@ -41,28 +41,35 @@ public class Analyzer {
 		// with index 1, to ascertain equality and thus contribute to 
 		// a word count
 		int sortedWordsLength = sortedWords.length;
-		int numberOfUniqueWords = 0;
+		int uniqueWordsIndex = 0;
 		wordCount = new int[sortedWordsLength];
 		for(int i = 1; i < sortedWordsLength; i++) {
 			
-			// Equality comparison with the last word
-			if(!sortedWords[i - 1].equals(sortedWords[i])) {
+			// If the two are equal
+			if(sortedWords[i - 1].equals(sortedWords[i])) {
 				
-				// Increment the wordcount for that particular entry
-				++wordCount[numberOfUniqueWords++];
-				++wordCount[numberOfUniqueWords];
+				while(i < sortedWordsLength 
+						&& sortedWords[i - 1].equals(sortedWords[i])) {
+					
+					++i;
+					++wordCount[uniqueWordsIndex];
+					
+				}
+				
+				--i;
 				
 			} else {
+				
+				// Then the two are not equal
+				++wordCount[uniqueWordsIndex++];
+				
 
-				// Increment the wordcount for that particular entry
-				++wordCount[numberOfUniqueWords];
-			
 			}
 			
 		}
 		
 		//TODO remove
-		System.out.println(numberOfUniqueWords);
+		System.out.println(uniqueWordsIndex);
 		System.out.println(Arrays.toString(sortedWords));
 		System.out.println(Arrays.toString(wordCount));
 		
@@ -83,9 +90,9 @@ public class Analyzer {
 		}
 		
 		// Add the last element if the list isn't empty
-		if(numberOfUniqueWords != 0) {
+		if(uniqueWordsIndex != 0) {
 
-			report += "\n   " + wordCount[numberOfUniqueWords - 1] + " " 
+			report += "\n   " + wordCount[uniqueWordsIndex - 1] + " " 
 					+ sortedWords[sortedWordsLength - 1] + "\n";
 			
 		}
