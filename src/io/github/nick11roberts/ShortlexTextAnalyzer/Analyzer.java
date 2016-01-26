@@ -58,11 +58,17 @@ public class Analyzer {
 		int runWordIndex = 0;
 		boolean startRun = false;
 		wordCount = new int[sortedWordsLength];
+		
+		// Initially assume every word is unique, thus setting every index to 1
 		for(int i = 0; i < sortedWordsLength; i++) {
 			
 			wordCount[i] = 1;
 			
 		}
+		
+		// Beginning with index 1, iterate through the sorted list
+		// keeping in mind that if there are duplicates, then they are 
+		// neighbors because the list is shortlex sorted
 		for(int i = 1; i < sortedWordsLength; i++) {
 			
 			if(sortedWords[i - 1].equals(sortedWords[i])){
