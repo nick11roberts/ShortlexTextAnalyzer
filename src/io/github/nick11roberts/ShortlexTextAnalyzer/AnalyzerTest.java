@@ -28,6 +28,8 @@ public class AnalyzerTest {
 			"and and and and and and",
 			"Sick sick and more sick Bleh.",
 			"the the the and and what what what what what what the and huh?",
+			"a a a b b b c c c d e f g h h h i i i j j j " +
+					"k l m n o p q r s t u v w w x x y z z z z", 
 	};
 	private String[] testCasesOut = {
 			"",
@@ -41,6 +43,13 @@ public class AnalyzerTest {
 			"\n   1 and\n\n   1 Sick\n\n   1 more\n\n   2 sick\n\n   " +
 					"1 Bleh.\n",
 			"\n   3 and\n\n   4 the\n\n   1 huh?\n\n   6 what\n",
+			"\n   3 a\n\n   3 b\n\n   3 c\n\n   1 d\n\n   " +
+					"1 e\n\n   1 f\n\n   1 g\n\n   3 h\n\n   " +
+					"3 i\n\n   3 j\n\n   1 k\n\n   1 l\n\n   " +
+					"1 m\n\n   1 n\n\n   1 o\n\n   1 p\n\n   " +
+					"1 q\n\n   1 r\n\n   1 s\n\n   1 t\n\n   " +
+					"1 u\n\n   1 v\n\n   2 w\n\n   2 x\n\n   " +
+					"1 y\n\n   4 z\n",
 			
 	};
 
