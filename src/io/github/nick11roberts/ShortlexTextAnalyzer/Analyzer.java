@@ -13,6 +13,11 @@ import java.util.Arrays;
  */
 public class Analyzer {
 	
+	// For special cases
+	private String emptyString = "";
+	private String spaceString = " ";
+	private String trivialOutputData = "";
+	
 	/**
 	 * Generates a report comprising of a shortlex sorted list 
 	 * with each item prepended with an occurrence count.  
@@ -21,6 +26,13 @@ public class Analyzer {
 	 * @return the formatted analytics String
 	 */
 	public String generateReport(String inputData) {
+		
+		// First handle special cases
+		if(inputData.equals(emptyString) || inputData.equals(spaceString)) {
+			
+			return trivialOutputData;
+			
+		}
 		
 		// String to eventually be returned
 		String report = "";
@@ -41,37 +53,46 @@ public class Analyzer {
 		// with index 1, to ascertain equality and thus contribute to 
 		// a word count
 		int sortedWordsLength = sortedWords.length;
-		int uniqueWordsIndex = 0;
+		int k = sortedWordsLength - 1;
+		int numberOfUniqueWords = sortedWordsLength;
+		int runWordIndex = 0;
+		boolean startRun = false;
 		wordCount = new int[sortedWordsLength];
+		for(int i = 0; i < sortedWordsLength; i++) {
+			
+			wordCount[i] = 1;
+			
+		}
 		for(int i = 1; i < sortedWordsLength; i++) {
 			
-			// If the two are equal
-			if(sortedWords[i - 1].equals(sortedWords[i])) {
+			if(sortedWords[i - 1].equals(sortedWords[i])){
 				
-				while(i < sortedWordsLength 
-						&& sortedWords[i - 1].equals(sortedWords[i])) {
+				// Check if we have begun a run of equal Strings
+				if(!startRun) {
 					
-					++i;
-					++wordCount[uniqueWordsIndex];
+					// Save the index, but only this time
+					startRun = true;
+					runWordIndex = i - 1;
 					
 				}
 				
-				--i;
+				// Update the appropriate index
+				wordCount[runWordIndex]++;
+				
+				// We no longer have this many unique elements, 
+				// update accordingly
+				wordCount[k] = 0;
+				k--;
+				numberOfUniqueWords--;
 				
 			} else {
 				
-				// Then the two are not equal
-				++wordCount[uniqueWordsIndex++];
+				// We have not started a run
+				startRun = false;
 				
-
 			}
 			
 		}
-		
-		//TODO remove
-		System.out.println(uniqueWordsIndex);
-		System.out.println(Arrays.toString(sortedWords));
-		System.out.println(Arrays.toString(wordCount));
 		
 		// Generate a report string by combining the two arrays and 
 		// removing duplicates
@@ -90,9 +111,10 @@ public class Analyzer {
 		}
 		
 		// Add the last element if the list isn't empty
-		if(uniqueWordsIndex != 0) {
+		if(numberOfUniqueWords != 0) {
 
-			report += "\n   " + wordCount[uniqueWordsIndex - 1] + " " 
+			// Assumed format of the report entries
+			report += "\n   " + wordCount[numberOfUniqueWords - 1] + " " 
 					+ sortedWords[sortedWordsLength - 1] + "\n";
 			
 		}
