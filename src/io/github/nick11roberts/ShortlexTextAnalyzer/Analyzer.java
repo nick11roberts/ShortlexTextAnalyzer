@@ -148,6 +148,7 @@ public class Analyzer {
 		String[] leftSide = Arrays.copyOfRange(toBeSorted, 0, midIndex);
 		String[] rightSide = Arrays.copyOfRange(toBeSorted, midIndex, arrayLength);
 		
+		// Recursively split the remaining sides and then combine them
 		this.mergeSort(leftSide);
 		this.mergeSort(rightSide);
 		this.merge(leftSide, rightSide, toBeSorted);
