@@ -30,6 +30,8 @@ public class AnalyzerTest {
 			"the the the and and what what what what what what the and huh?",
 			"a a a b b b c c c d e f g h h h i i i j j j " +
 					"k l m n o p q r s t u v w w x x y z z z z", 
+			"z b c c o p q m n c d r s t u v y a z h g h " +
+					"k l a a b b e h f w w x x j i i j i z z z j", 
 	};
 	private String[] testCasesOut = {
 			"",
@@ -50,7 +52,13 @@ public class AnalyzerTest {
 					"1 q\n\n   1 r\n\n   1 s\n\n   1 t\n\n   " +
 					"1 u\n\n   1 v\n\n   2 w\n\n   2 x\n\n   " +
 					"1 y\n\n   4 z\n",
-			
+			"\n   3 a\n\n   3 b\n\n   3 c\n\n   1 d\n\n   " +
+					"1 e\n\n   1 f\n\n   1 g\n\n   3 h\n\n   " +
+					"3 i\n\n   3 j\n\n   1 k\n\n   1 l\n\n   " +
+					"1 m\n\n   1 n\n\n   1 o\n\n   1 p\n\n   " +
+					"1 q\n\n   1 r\n\n   1 s\n\n   1 t\n\n   " +
+					"1 u\n\n   1 v\n\n   2 w\n\n   2 x\n\n   " +
+					"1 y\n\n   5 z\n",		
 	};
 
 	/**
